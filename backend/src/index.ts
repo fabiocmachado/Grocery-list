@@ -1,5 +1,5 @@
-import express  from "express";
-import routes from "../routes"
+import express from "express";
+import routes from "../routes";
 import cors from "cors";
 import DB from "./db";
 
@@ -14,5 +14,5 @@ DB();
 app.use("/", routes);
 
 app.listen(port, () => {
-	console.log(`Server is running on http://localhost:${port}! `);
+  console.log(`Server is running on http://localhost:${port}! `);
 });
