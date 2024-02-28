@@ -70,6 +70,9 @@ const AddForm = () => {
             required={true}
             value={formData.section}
           >
+            <option value="" disabled selected hidden>
+              Escolha uma seção
+            </option>
             <option value="bebidas">Bebidas</option>
             <option value="comida">Comida</option>
             <option value="Higiene pessoal">Higiene pessoal</option>

@@ -13,10 +13,10 @@ async function fetchProducts() {
 }
 
 interface ProductTableProps {
-  products: FormatedList[];
+  list: FormatedList[];
 }
 
-function ProductTable({ products }: ProductTableProps) {
+function ProductTable({ list }: ProductTableProps) {
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -26,16 +26,16 @@ function ProductTable({ products }: ProductTableProps) {
         </tr>
       </thead>
       <tbody>
-        {products?.map((product) => (
+        {list?.map((list, index) => (
           <tr
-            key={product.product}
+            key={index}
             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
           >
             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {product.product}
+              {list.product}
             </td>
             <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {product.section}
+              {list.section}
             </td>
           </tr>
         ))}
@@ -45,13 +45,13 @@ function ProductTable({ products }: ProductTableProps) {
 }
 
 export default function List() {
-  const [products, setProducts] = useState<FormatedList[]>([]);
+  const [list, setList] = useState<FormatedList[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await fetchProducts();
-        setProducts(data);
+        setList(data);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -67,11 +67,7 @@ export default function List() {
         </div>
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          {products.length > 0 ? (
-            <ProductTable products={products} />
-          ) : (
-            <p>Loading...</p>
-          )}
+          {list.length > 0 ? <ProductTable list={list} /> : <p>Loading...</p>}
         </div>
         <div>
           <button
